@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+    crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.9.1/lib/browser/math.min.js"></script>
+    <script>
+        function logAdd(msg){
+            var ul = document.getElementById("logs")
+            var l_item = document.createElement("li")
+            var msg_text = document.createTextNode(msg)
+            l_item.appendChild(msg_text)
+            ul.appendChild(l_item)
+        }
+
+        function basic_calculate() {
+            exp = document.getElementById("expression").value;
+            console.log(exp);
+            if(exp) {
+                try {
+                    ans = eval(exp)
+                    document.getElementById("expression").value = ans;
+                    logAdd(exp+"="+ans+". Done with basic calculate.")
+                }
+                catch(e){
+                    console.log("Wrong Expression")
+                    document.getElementById("expression").value ="";
+                    logAdd(exp+" is not accepted. Please write mathematical expression. By Basic Calculate")
+                }
+            }
+        }
+        function sci_calculate() {
+            exp = document.getElementById("expression").value;
+            console.log(exp);
+            if(exp) {
+                try {
+                    ans = math.evaluate(exp)
+                    document.getElementById("expression").value = ans;
+                    logAdd(exp+"="+ans+". Done with scientific calculate.")
+                }
+                catch(e){
+                    console.log("Wrong Expression")
+                    document.getElementById("expression").value ="";
+                    logAdd(exp+" is not accepted. Please write mathematical expression. By Scientific Calculate")
+                }
+            }
+        }
+        function init_app(){
+            basic_cal = document.getElementById("basic_calculate")
+            basic_cal.addEventListener("click", basic_calculate)
+            sci_cal = document.getElementById("sci_calculate")
+            sci_cal.addEventListener("click", sci_calculate)
+        }
+    </script>
+</head>
+<body onload="init_app()">
+    <h2 align="center">Basic JavaScript Calculator</h2>
+<br>
+    <div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col">
+        <input type="input" class="form-control" id="expression" placeholder="2+4" />
+        <div class="d-flex">
+            <button id="basic_calculate" class="btn btn-primary" >
+                Basic Calculate
+            </button>
+            <button id="sci_calculate" class="btn btn-warning">
+                Scientific Calculate
+            </button>
+        </div>
+        <h4>Answers</h4>
+        <ul id="logs">
+        </ul>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+<p align="right"><b>Made by Pratham Bhalla on 29/07/2023</b></p>
+</body>
+</html>
